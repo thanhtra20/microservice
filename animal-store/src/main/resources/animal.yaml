@@ -1,0 +1,86 @@
+openapi: 3.0.0
+
+info:
+  version: 0.0.1
+  title: Animal Store
+  description: This is an animal store server
+
+tags:
+  - name: "animal-controller"
+
+paths:
+
+  /animal:
+    get:
+      summary: Get list of animals
+      operationId: findAll
+      tags:
+        - "animal-controller"
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Animal'
+
+
+    post:
+      summary: create or update animals
+      operationId: saveOrUpdate
+      tags:
+        - "animal-controller"
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Animal'
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Animal'
+
+
+
+  /animal/{animalId}:
+    delete:
+      summary: delete animal by ID
+      operationId: deleteAnimal
+      tags:
+        - "animal-controller"
+
+      parameters:
+        - in: path
+          name: animalId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+
+components:
+  schemas:
+    Animal:
+      description: Animal
+      type: object
+      required:
+        - _id
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+          description: name of animal
+        type:
+          type: string
+          description: type of animal
