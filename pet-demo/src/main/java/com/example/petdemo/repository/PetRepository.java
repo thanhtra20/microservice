@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface PetRepository extends MongoRepository<Pet, String> {
-   List<Pet> findByStatus(String status);
+//   List<Pet> findByType(String type);
+//
 }
