@@ -51,6 +51,7 @@ paths:
       operationId: deleteAnimal
       tags:
         - "animal-controller"
+
       parameters:
         - in: path
           name: animalId
@@ -77,20 +78,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Animal'
         '400':
           description: Invalid ID supplied
         '404':
           description: Not found
 
 
-  /animal/findByType:
+
+  /animal/findByType/{animalType}:
     get:
       summary: Get list of animals by type
       operationId: findByType
       tags:
         - "animal-controller"
+      parameters:
+        - in: path
+          name: animalType
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
@@ -104,7 +116,6 @@ paths:
           description: Invalid type value
         '404':
           description: Animal not found
-
 
 components:
   schemas:

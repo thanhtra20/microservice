@@ -33,6 +33,10 @@ public class AnimalApiClient {
     return animalControllerApi.saveOrUpdate(animal);
   }
 
+  public List<Animal> getAnimalsByType(String animalType){
+    return animalControllerApi.findByType(animalType);
+  }
+
   public void deleteAnimalById(String animalId){
     animalControllerApi.deleteAnimal(animalId);
   }

@@ -91,7 +91,7 @@ paths:
 
 
 
-  /animal/findByType:
+  /animal/findByType/{animalType}:
     get:
       summary: Get list of animals by type
       operationId: findByType

@@ -42,21 +42,17 @@ public class PetService implements PetApiDelegate {
 
     @Override
     public ResponseEntity<Void> addDogs() {
-        List<Animal> animals = animalApiClient.findAll();
-
-//        animals.stream()
-//                .filter(animal -> animal.getType().equals("dog"))
-//                .map(dog -> AnimalConverter.toPet(dog))
-//                .forEach(dogP -> petRepository.save(dogP));
-
+        //Get all dogs from Animal Service
+        List<Animal> animals = animalApiClient.getAnimalsByType("dog");
+        //Loop through dogs
         for (Animal animal: animals) {
-            if(animal.getType().equals("dog")){
+                //Convert from animal to dog
                 Pet dog = AnimalConverter.toPet(animal);
+                //save dog to pet database
                 petRepository.save(dog);
+                //Send request to delete this dog
                 animalApiClient.deleteAnimalById(animal.getId());
-            }
         }
-
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
